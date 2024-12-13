@@ -8,7 +8,7 @@ export default function Index(){
         <View style={{flex:1, padding: 40, gap: 40}}>
             <Welcome />
             <StepsList />
-            <Button>
+            <Button isLoading>
                 <Button.Title> Começar </Button.Title>
             </Button>
         </View>

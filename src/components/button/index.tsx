@@ -1,11 +1,25 @@
-import { TouchableOpacity, TouchableOpacityProps, Text, TextProps } from "react-native";
+import { 
+    TouchableOpacity, 
+    TouchableOpacityProps, 
+    Text, 
+    TextProps,
+    ActivityIndicator
+} from "react-native";
 
 import { s } from "./styles";
 import { colors } from "@/styles/theme";
 
-function Button({children, style}: TouchableOpacityProps){
-    return <TouchableOpacity style={[s.container, style]} activeOpacity={0.5}>
-        {children}
+type ButtonProps =  TouchableOpacityProps & {
+    isLoading?: boolean,
+}
+
+function Button({children, style, isLoading=false}: ButtonProps){
+    return <TouchableOpacity style={[s.container, style]} activeOpacity={0.5} disabled={isLoading}>
+        {
+            isLoading ? 
+                <ActivityIndicator size="small" color={colors.gray[100]} /> 
+                : children
+        }
     </TouchableOpacity>;
 }
 
