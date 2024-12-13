@@ -5,6 +5,7 @@ import {
     TextProps,
     ActivityIndicator
 } from "react-native";
+import { IconProps as TablerIconProps } from "@tabler/icons-react-native";
 
 import { s } from "./styles";
 import { colors } from "@/styles/theme";
@@ -37,6 +38,17 @@ function Title({children}: TextProps){
     </Text>;
 }
 
+type IconProps = {
+    icon: React.ComponentType<TablerIconProps>,
+}
+
+function Icon({icon: Icon}: IconProps){
+    return <Icon size={24} color={colors.gray[100]} />
+}
+
+// Fazendo isso de Componente.Componente2 faz com que seja possivel
+// personalizar esse componente 2 de fora
 Button.Title = Title;
+Button.Icon = Icon;
 
 export { Button };
