@@ -13,8 +13,16 @@ type ButtonProps =  TouchableOpacityProps & {
     isLoading?: boolean,
 }
 
-function Button({children, style, isLoading=false}: ButtonProps){
-    return <TouchableOpacity style={[s.container, style]} activeOpacity={0.5} disabled={isLoading}>
+// Ao utilizar o spread operator e passar essa variavel para o 
+// touchable opacity, da a opcao de poder passar outro atributo (nesse caso
+// referente ao TouchableOpacityProps) para o TouchableOpacity
+function Button({children, style, isLoading=false, ...rest}: ButtonProps){
+    return <TouchableOpacity 
+        style={[s.container, style]} 
+        activeOpacity={0.5} 
+        disabled={isLoading}
+        {...rest}
+    >
         {
             isLoading ? 
                 <ActivityIndicator size="small" color={colors.gray[100]} /> 
