@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/services/api";
 import { CategoriesList, CategoriesProps } from "@/components/categories_list";
 import { PlaceProps } from "@/components/place";
+import { PlacesList } from "@/components/places_list";
 
 type MarketsProps = PlaceProps & {
     
@@ -40,19 +41,19 @@ export default function Home(){
         fetchCategories();
     }, []);
 
-    // Esse hook vai ser dependente da mudanca da categoria selecionada, ou seja,
-    // quando mudar a categoria, vai buscar novamente os locais/estabelecimentos
     useEffect(()=> {
         fetchMarkets();
     },[categorySelected]);
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: "#CECECE"}}>
             <CategoriesList 
                 data={categories} 
                 onSelect={setCategorySelected}
                 selected={categorySelected}
             />
+
+            <PlacesList data={markets} />
         </View>
     );
 }

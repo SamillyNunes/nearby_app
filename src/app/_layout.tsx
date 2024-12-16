@@ -1,4 +1,6 @@
 import { Stack } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import {colors} from "@/styles/theme";
 import { Loading } from "@/components/loading";
 
@@ -25,11 +27,15 @@ export default function Layout(){
     if(!fontsHaveLoaded){
         return <Loading />;
     }
+    
+    return <GestureHandlerRootView style={{flex: 1}}>
+        <Stack
+            screenOptions={{
+                headerShown: false, 
+                contentStyle: {backgroundColor: colors.gray[100]}
+            }} 
+        />
 
-    return <Stack //navigation type in stack
-        screenOptions={{
-            headerShown: false, // omit the head
-            contentStyle: {backgroundColor: colors.gray[100]}
-        }} 
-    />;
+    </GestureHandlerRootView>
+    
 }

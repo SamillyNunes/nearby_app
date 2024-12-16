@@ -10,6 +10,7 @@ export const s = StyleSheet.create({
         gap:12,
         padding:24,
         paddingBottom: 100,
+        maxHeight: "100%",
     },
     indicator: {
         width: 80,
