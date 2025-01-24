@@ -6,6 +6,7 @@ import { api } from "@/services/api";
 import { CategoriesList, CategoriesProps } from "@/components/categories_list";
 import { PlaceProps } from "@/components/place";
 import { PlacesList } from "@/components/places_list";
+import { fontFamily, colors } from "@/styles/theme";
 
 type MarketsProps = PlaceProps & {
   latitude: number;
@@ -62,34 +63,56 @@ export default function Home() {
         selected={categorySelected}
       />
 
-      <MapView 
-        style={{flex: 1}}
+      <MapView
+        style={{ flex: 1 }}
         initialRegion={{
-            latitude: currentLocation.latitude,
-            longitude: currentLocation.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+          latitude: currentLocation.latitude,
+          longitude: currentLocation.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         }}
       >
         <Marker
-            identifier="current"
-            coordinate={currentLocation}
-            image={require("@/assets/location.png")}
+          identifier="current"
+          coordinate={currentLocation}
+          image={require("@/assets/location.png")}
         />
 
-        {markets.map((item)=> (
-            <Marker
-                key={item.id}
-                identifier={item.id}
-                coordinate={{
-                    latitude: item.latitude,
-                    longitude: item.longitude,
-                }}
-                image={require("@/assets/pin.png")}
-            />
+        {markets.map((item) => (
+          <Marker
+            key={item.id}
+            identifier={item.id}
+            coordinate={{
+              latitude: item.latitude,
+              longitude: item.longitude,
+            }}
+            anchor={{ x: 0.5, y: 0.5 }}
+            image={require("@/assets/pin.png")}
+          >
+            <Callout>
+              <View style={{padding: 10}}>
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: colors.gray[600],
+                    fontFamily: fontFamily.medium,
+                  }}
+                >
+                  {item.name}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: colors.gray[600],
+                    fontFamily: fontFamily.regular,
+                  }}
+                >
+                  {item.address}
+                </Text>
+              </View>
+            </Callout>
+          </Marker>
         ))}
-
-
       </MapView>
 
       <PlacesList data={markets} />
